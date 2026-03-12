@@ -1,28 +1,28 @@
-# Deployment Strategy
+# Git Branching Strategy
 
-The application is deployed on AWS EC2 using an Ubuntu server instance.
+This project follows a structured Git branching model to ensure safe development and deployment.
 
-## Steps
+## Branches
 
-1. Launch an EC2 instance on AWS.
-2. Configure security groups to allow ports 22 (SSH) and 3000 (application).
-3. Connect to the instance using SSH.
-4. Install Node.js and Git.
-5. Clone the GitHub repository.
-6. Install project dependencies using npm.
-7. Start the application using Node.js.
+main  
+The main branch represents the production-ready code. Only stable and tested code is merged into this branch.
 
-## Production URL
+develop  
+The develop branch is used as an integration branch where features are merged and tested before moving to production.
 
-http://52.66.245.62:3000
+feature/*
+Feature branches are created for new development tasks. Example: feature/task-api.
 
-## Process Management
+## Workflow
 
-PM2 is used as a process manager to keep the Node.js application running even if the server restarts.
+1. Create a feature branch from develop.
+2. Implement the feature.
+3. Push the branch to GitHub.
+4. Create a Pull Request to merge into develop.
+5. After testing, develop is merged into main for production release.
 
-## Rollback Strategy
+## Branch Protection Strategy
 
-If a deployment fails:
-- Identify the failing commit.
-- Revert to the previous stable commit.
-- Redeploy the application.
+- Direct commits to the main branch are restricted.
+- Pull requests must be reviewed before merging.
+- CI/CD pipeline must pass before merging.
